@@ -1,0 +1,2 @@
+[10-May-2013 11:06:34 Australia/Perth] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/agribsg/public_html/application/controllers/register.php on line 163
+[10-May-2013 11:07:07 Australia/Perth] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting T_FUNCTION in /home/agribsg/public_html/application/controllers/register.php on line 325

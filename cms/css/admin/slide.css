@@ -1,0 +1,88 @@
+/**{ margin: 0; padding: 0; }*/
+
+#steps_container h4{
+	margin: 0 0 5px 0;
+	font-family: Arial;
+	color:#2f4400;
+	font-size: 14px;
+	text-transform: uppercase;
+}
+
+#steps_container .label_container{
+	overflow: hidden;
+	margin-top: 0;
+	float: left;
+	width: 245px;
+}
+#steps_container .text_container{
+	overflow: hidden;
+	margin: 0 0 10px 0;
+}
+#steps_container .label{
+	display: block;
+	font-size: 11px;
+	font-weight: bold;
+}
+.label_container span{
+	float: left;
+	width: 96%;
+}
+#steps_container span{
+	font-family: Arial;
+	font-size: 16px;
+	display: block;
+}
+#steps_container .info{
+	border-bottom: 1px solid #eee;
+}
+#steps_container li{
+	font-size: 14px;
+}
+
+.ui-accordion .ui-accordion-content{
+	overflow: hidden!important;
+}
+
+.ui-menu .ui-menu{
+	z-index: 100;
+}
+
+#right .ui-widget-content{
+	background: #fffcec!important;
+}
+
+.agriculture .hectares .label,
+.agriculture .usage .label,
+.agriculture .vendor .label{
+	width: 400px;
+	float: left;
+	font-size: 13px!important;
+}
+.agriculture .hectares .info,
+.agriculture .usage .info,
+.agriculture .vendor .info{
+	width: 310px;
+	float: right;
+	border: none!important;
+}
+.agriculture .text_container{
+	margin-bottom: 5px!important;
+}
+
+.personal_details, 
+.contact_details,
+.billing,
+.postal,
+.activity,
+.stocks,
+.hectares,
+.usage,
+.vendor,
+.fertiliser_account_handler,
+.reseller_account,
+.stockfeed_account,
+.independent_nutritionist,
+.independent_agronomist{
+	overflow: hidden;
+	margin-bottom: 10px;
+}
