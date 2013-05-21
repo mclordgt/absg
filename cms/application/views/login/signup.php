@@ -217,12 +217,12 @@
 					<?php $options[5] = 'Other'; ?>
 
 				<?php echo form_dropdown('primary_activity',$options, '', 'tabindex="-1"'); ?>		
-				<input type="text" name="primary_activity_other" class="hide"/>		
+				<input type="text" name="primary_activity_other" class="hide" placeholder="Other Primary Activity"/>		
 			</span>
 
 			<span class="checkbox_container">
 				<label for="activity" class="check_exception">Other Activities</label>
-				<span class="check_span">&nbsp;</span>
+				<br style="clear:both">
 				<?php foreach ($primaryActivity as $activity) : ?>
 					<span class="check">
 						<?php echo form_checkbox( array('name' => 'activity[]','value' => $activity->activity_id, 'tabindex'=>'-1') ); ?> <?php echo form_label($activity->activity_name, 'activity'); ?>
@@ -231,7 +231,7 @@
 					<span class="check">
 						<?php echo form_checkbox( array('name' => 'activity[]','value' => 5, 'tabindex'=>'-1', 'class' => 'other_activity') ); ?> <?php echo form_label('Other', 'activity'); ?>
 					</span>
-					<input type="text" name="other_activity_other" class="hide"/>	
+					<input type="text" name="other_activity_other" class="hide" placeholder="Other Activity"/>	
 			</span>
 
 		</div> <!-- /.fieldset -->
@@ -370,7 +370,12 @@
 				<label for="fertiliser_account_handler"></label>
 				<?php foreach ($fertiliserAccountHandlers as $fertiliserAccountHandler) : ?>
 					<span class="check">
-						<?php echo form_checkbox( array('name' => 'fertiliser_account_handler[]', 'value' => $fertiliserAccountHandler->sp_id, 'tabindex' => '-1') ); ?><?php echo form_label($fertiliserAccountHandler->sp_name, 'fertiliser_account_handler'); ?> <br />
+						<?php if($fertiliserAccountHandler->sp_id == 5) : ?>
+							<?php $fertArray = array( 'name' => 'fertiliser_account_handler[]', 'value' => $fertiliserAccountHandler->sp_id, 'tabindex' => '-1', 'class' => 'fertAccountOther'); ?>
+						<?php else :?>
+							<?php $fertArray = array('name' => 'fertiliser_account_handler[]', 'value' => $fertiliserAccountHandler->sp_id, 'tabindex' => '-1'); ?>
+						<?php endif; ?>
+						<?php echo form_checkbox( $fertArray ); ?><?php echo form_label($fertiliserAccountHandler->sp_name, 'fertiliser_account_handler'); ?> <br />
 					</span>	
 				<?php endforeach;?> 
 			</span>
@@ -382,7 +387,12 @@
 				<label for="resellers"></label>
 				<?php foreach ($resellerAccounts as $resellerAccount) : ?>
 					<span class="check">
-						<?php echo form_checkbox( array( 'name' => 'resellers[]', 'value' => $resellerAccount->sp_id, 'tabindex' => '-1') ); ?> <?php echo form_label($resellerAccount->sp_name, 'resellers'); ?> <br />
+						<?php if($resellerAccount->sp_id == 5) : ?>
+							<?php $resellerArray = array( 'name' => 'resellers[]', 'value' => $resellerAccount->sp_id, 'tabindex' => '-1', 'class' => 'resellerAccountOther'); ?>
+						<?php else :?>
+							<?php $resellerArray = array( 'name' => 'resellers[]', 'value' => $resellerAccount->sp_id, 'tabindex' => '-1'); ?>
+						<?php endif; ?>
+						<?php echo form_checkbox( $resellerArray ); ?> <?php echo form_label($resellerAccount->sp_name, 'resellers'); ?> <br />
 					</span>
 				<?php endforeach; ?>
 			</span>
@@ -394,7 +404,12 @@
 				<label for="stockfeeds"></label>
 				<?php foreach ($stockfeedAccounts as $stockfeedAccount) : ?>
 					<span class="check">
-						<?php echo form_checkbox( array('name' => 'stockfeeds[]', 'value' => $stockfeedAccount->sp_id, 'tabindex' => '-1') ); ?> <?php echo form_label($stockfeedAccount->sp_name, 'stockfeeds'); ?> <br />
+						<?php if($stockfeedAccount->sp_id == 5) : ?>
+							<?php $stockfeedArray = array('name' => 'stockfeeds[]', 'value' => $stockfeedAccount->sp_id, 'tabindex' => '-1', 'class' => 'stockfeedAccountOther'); ?>
+						<?php else :?>
+							<?php $stockfeedArray = array('name' => 'stockfeeds[]', 'value' => $stockfeedAccount->sp_id, 'tabindex' => '-1'); ?>
+						<?php endif; ?>
+						<?php echo form_checkbox( $stockfeedArray ); ?> <?php echo form_label($stockfeedAccount->sp_name, 'stockfeeds'); ?> <br />
 					</span>
 				<?php endforeach; ?>
 			</span>
@@ -462,7 +477,8 @@
 				<?php endforeach;?> 
 
 				<?php echo form_dropdown('how_hear',$how_hear, '', 'tabindex="-1"'); ?>
-				<input type="text" name="how_hear_other" class="hide" tabindex="-1"/>
+				<input type="text" name="how_hear_other" placeholder="Other" class="hide" tabindex="-1"/>
+				<input type="text" name="how_hear_recommended" placeholder=""If an existing member of the group recommended that you join, please state their name" class="hide" tabindex="-1"/>
 			</span>
 		</div> <!-- /.fieldset -->
 
@@ -647,24 +663,24 @@
 			}
 		});
 
-		$('input[name="fertiliser_account_handler[]"]').change(function(){
-			if( $(this).val() == 5){
+		$('.fertAccountOther').change(function(){
+			if( $(this).is(':checked')){
 				$('input[name="fertiliser_account_handler_other"]').removeClass('hide');
 			} else {
 				$('input[name="fertiliser_account_handler_other"]').addClass('hide');
 			}
 		});
 
-		$('input[name="resellers[]"]').change(function(){
-			if( $(this).val() == 5 ){
+		$('.resellerAccountOther').change(function(){
+			if( $(this).is(':checked')){
 				$('input[name="resellers_other"]').removeClass('hide');
 			} else {
 				$('input[name="resellers_other"]').addClass('hide');
 			}
 		});
 
-		$('input[name="stockfeeds[]"]').change(function(){
-			if( $(this).val() == 5 ){
+		$('stockfeedAccountOther').change(function(){
+			if( $(this).is(':checked')){
 				$('input[name="stockfeeds_other"]').removeClass('hide');
 			} else {
 				$('input[name="stockfeeds_other"]').addClass('hide');
@@ -674,7 +690,9 @@
 		$('select[name="how_hear"]').change(function(){
 
 			if($(this).val() == 4){
-				$(this).parent().find('input').removeClass('hide');
+				$(this).parent().find('input[name="how_hear_other"]').removeClass('hide');
+			} else if($(this).val() == 1) {
+				$(this).parent().find('input[name="how_hear_recommended"]').removeClass('hide');
 			} else {
 				$(this).parent().find('input').addClass('hide');
 			}
@@ -868,7 +886,9 @@
 				case 'activity':
 
 					var primary_activity	= $('select[name="primary_activity"]'),
-						activities			= $('input[name="acitivity[]"]'),
+						activities			= $('input[name="activity[]"]'),
+						otherActivity 		= $('.other_activity'),
+						otherActivityOther 	= $('input[name="other_activity_other"]'),
 						tempActivity		= new Array();
 
 					$('input[name="activity[]"]:checked').each(function(){
@@ -889,21 +909,6 @@
 						var tempString = $(this).parent().find('label').text();
 
 						if(tempString == 'Other Stock' || tempString == 'Other Stock (Please specify)'){
-
-							// if( zeroRegex.test($(this).val()) ){
-
-							// 	if(tempString.indexOf(' (Please specify)') == -1){
-
-							// 		$(this).parent().find('label').append(' (Please specify)').addClass('error');	
-							// 	}
-							// 	perr.push(1);	
-
-							// } else {
-
-							// 	var newString = tempString.replace(' (Please specify)', '');
-							// 	$(this).parent().find('label').text(newString).removeClass('error');									
-
-							// }
 
 						} else {
 

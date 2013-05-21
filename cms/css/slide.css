@@ -134,7 +134,7 @@ form{
 }
 
 .checkbox_container label{
-    width: 65px;
+    width: 64px;
     float: right;
 }
 .check_extend{
@@ -263,6 +263,7 @@ input[name="fertiliser_account_handler_other"],
 input[name="resellers_other"],
 input[name="stockfeeds_other"]{
     clear:both;
+    width: 50%;
 }
 
 #activities .label_container{
@@ -274,5 +275,14 @@ input[name="stockfeeds_other"]{
     width: 98%;
 }
 #activities input[name="other_activity_other"]{
-    width: 35%;
+    width: 46%;
+}
+#activities .error{
+    margin-bottom: 0;
+}
+.check_container.fertiliser-account, 
+.check_container.resellers,
+.check_container.stockfeeds{
+    overflow: hidden;
+    display: block;
 }

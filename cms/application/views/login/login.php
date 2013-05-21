@@ -14,33 +14,19 @@
 
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/normalize.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/admin/main.css">
-    <link href="<?php echo base_url(); ?>plugins/jquery-ui-1.10.3.custom.agribsg/css/agribsg/jquery-ui-1.10.3.custom.css" rel="stylesheet">
-    <script src="<?php echo base_url(); ?>plugins/jquery-ui-1.10.3.custom.agribsg/js/jquery-1.9.1.js"></script>
-    <script src="<?php echo base_url(); ?>plugins/jquery-ui-1.10.3.custom.agribsg/js/jquery-ui-1.10.3.custom.js"></script>
-<?php if(in_array($this->uri->segment(2),array('page','add','edit','media'))): ?>
 
-    <script src="<?php echo base_url(); ?>plugins/ckeditor/ckeditor.js"></script>
-    <script src="<?php echo base_url(); ?>plugins/ckfinder/ckfinder.js"></script>
-
-<?php endif; ?>
-    <script>
-    $(function() {
-        
-        $('#menu').css({'width':'200px'}).menu();
-    });
-    </script>
 </head>
 <body>
+<div id="main-container">
+	<p class="logo"><img src="<?php echo base_url(); ?>img/logo.png" alt=""></p>
 
 	<div id="login-container">
 
-		<p class="logo"><img src="<?php echo base_url(); ?>img/logo.png" alt=""></p>
-
-			<?php if(validation_errors()): ?>
-				<div id="error">
-					<?php echo validation_errors(); ?>
-				</div>
-			<?php endif; ?>
+		<?php if(validation_errors()): ?>
+			<div id="error">
+				<?php echo validation_errors(); ?>
+			</div>
+		<?php endif; ?>
 
 		<?php echo form_open('auth'); ?>
 			<p>
@@ -74,6 +60,10 @@
 		</p>
 
 	</div> <!-- /#login-container -->
-
+	<div id="savings-deals">
+		<h3>Savings</h3>		
+		<p>Recently we tested the saving power of the buying group. We managed to achieve a  28% on tractor spare parts for Phil Beattie at Bushy Park. This was equivalent to $1700!</p>
+	</div> <!-- /#savings-deals -->
+</div> <!-- /#main-container -->
 </body>
 </html>

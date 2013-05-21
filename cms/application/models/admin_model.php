@@ -406,8 +406,12 @@ class Admin_model extends CI_Model{
 
 	public function getContent($sub_url){
 
+		$this->db->select('C.page_url, A.*');
+		$this->db->from('subpages as A');
+		$this->db->join('page_data as B','B.sub_id = A.sub_id');
+		$this->db->join('pages as C','C.page_id = B.parent_id');
 		$this->db->where('sub_url',$sub_url);
-		$query = $this->db->get('subpages');
+		$query = $this->db->get();
 
 		return $query->row();
 

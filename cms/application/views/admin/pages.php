@@ -1,4 +1,5 @@
-		<?php if($this->uri->segment(3) == "faqs" || $this->uri->segment(3) == "news"): ?>
+		<?php $add_array = array('faqs','news','savings','deals'); ?>
+		<?php if(in_array($this->uri->segment(3), $add_array)): ?>
 			<?php echo anchor('admin/add/'.$this->uri->segment(3), 'Add New Entry', 'class="add-entry"'); ?>
 		<?php endif; ?>
 		
@@ -7,15 +8,15 @@
 		<?php endif; ?>
 
 		<?php if ($all) : ?>
+			
+			<table class="list" cellpadding="10">
+				<tr>
+					<!-- <th width="20">&nbsp;</th> -->
+					<th width="630">TITLE</th>
+					<th>Action</th>
+				</tr>
 
-			<?php if (count($contents) > 0) : ?>
-
-				<table class="list" cellpadding="10">
-					<tr>
-						<!-- <th width="20">&nbsp;</th> -->
-						<th width="630">TITLE</th>
-						<th>Action</th>
-					</tr>
+				<?php if (count($contents) > 0) : ?>
 					
 					<?php foreach ($contents as $value) : ?>
 
@@ -29,15 +30,18 @@
 
 					<?php endforeach; ?>
 
-				</table>
+				<?php else : ?>
+					<tr>
+						<td colspan="2">There are no contents for this page.</td>
+					</tr>
+				<?php endif; ?>
 
-			<?php else : ?>
-				<p>There are no contents for this page. </p>
-			<?php endif; ?>
+			</table>
+
 
 		<?php else: ?>
 
-			<?php echo anchor('admin/', '< Go Back'); ?>
+			<?php echo anchor('admin/page/'.$content->page_url, '< Go Back'); ?>
 
 			<form method="POST">	
 

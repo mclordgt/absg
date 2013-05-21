@@ -1,6 +1,8 @@
 	<div id="left">
 		<ul id="menu" class="menu">
-			<li><?php echo anchor('admin/', 'Admin'); ?></li>
+			<li>
+				<?php echo anchor('admin/', 'Admin'); ?>
+			</li>
 			<li><?php echo anchor('admin/members', 'Members'); ?></li>
 			<li><?php echo anchor('admin/suppliers', 'Suppliers'); ?></li>
 			<li>
@@ -15,6 +17,8 @@
 					<li><?php echo anchor('admin/page/news','News'); ?></li>
 					<li><?php echo anchor('admin/edit/membership-regulations','Membership Regulations'); ?></li>
 					<li><?php echo anchor('admin/edit/privacy-policy','Policy Policy'); ?></li>
+					<li><?php echo anchor('admin/page/savings', 'Savings'); ?></li>
+					<li><?php echo anchor('admin/page/deals', 'Deals'); ?></li>
 				</ul>
 			</li>
 			<li><?php echo anchor('admin/media','Media'); ?></li>

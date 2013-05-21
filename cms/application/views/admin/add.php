@@ -13,29 +13,6 @@
 			<p>
 				<input type="text" name="sub_title" placeholder="Title">
 			</p>
-			
-			<!-- p>
-				<input type="text" name="sub_url" placeholder="Url">
-			</p -->
-
-<!-- 			<p>
-				<label for="parent_id">Parent Page:</label>
-				<select name="parent_id">
-					<?php foreach ($pages as $page) : ?>
-						<option value="<?php echo $page->page_id; ?>"><?php echo ucwords($page->page_title); ?></option>	
-					<?php endforeach; ?>			
-				</select>
-			</p>
-			<p>
-				<label for="">Category:</label>
-				<select name="category_id">
-					<option value="0"></option>
-					<?php foreach ($categories as $category) : ?>
-						<option value="<?php echo $category->category_id; ?>"><?php echo ucwords($category->category); ?></option>	
-					<?php endforeach; ?>
-				</select>
-
-			</p> -->
 
 			<textarea name="sub_content" id="editor"></textarea>
 			<script>

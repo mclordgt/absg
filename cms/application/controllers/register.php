@@ -104,30 +104,32 @@ class Register extends CI_Controller {
 
 				$this->register_model->insertData('activity_data',$primary_data);
 
-				$arr_activity = $this->input->post('activity');
+				if($this->input->post('activity')){
+					$arr_activity = $this->input->post('activity');
 
-				if (is_array($arr_activity) && $this->input->post('primary_activity') != 5) {
-					$activity = array_diff( $this->input->post('activity'), array( $this->input->post('primary_activity') ) );
-				} else {
-					$activity = $this->input->post('activity');
-				}
+					if (is_array($arr_activity) && $this->input->post('primary_activity') != 5) {
+						$activity = array_diff( $this->input->post('activity'), array( $this->input->post('primary_activity') ) );
+					} else {
+						$activity = $this->input->post('activity');
+					}
 
-				foreach ($activity as $activity_key => $activity_value) {				
+					foreach ($activity as $activity_key => $activity_value) {				
 
-					if($activity_value == 5){
+						if($activity_value == 5){
 
-						$activity_value = $this->input->post('other_activity_other');
+							$activity_value = $this->input->post('other_activity_other');
+
+						}
+						
+						$activity_data = array(
+								'personal_id'		=> $personal_id,
+								'activity_id'		=> $activity_value,
+								'primary_activity'	=> 'no'
+							);
+
+						$this->register_model->insertData('activity_data',$activity_data);
 
 					}
-					
-					$activity_data = array(
-							'personal_id'		=> $personal_id,
-							'activity_id'		=> $activity_value,
-							'primary_activity'	=> 'no'
-						);
-
-					$this->register_model->insertData('activity_data',$activity_data);
-
 				}
 
 				foreach ($this->input->post('stocks') as $stock_key => $stock_value) {
@@ -214,9 +216,11 @@ class Register extends CI_Controller {
 
 				$this->register_model->insertData('priorities',$priority_data);
 
+				$how_hear = ($this->input->post('how_hear') == 4 ? $this->input->post('how_hear_other') : ($this->input->post('how_hear') == 1 ? 'Recommended By: ' . $this->input->post('how_hear_recommended') : $this->input->post('how_hear') ) );
+
 				$other_data = array(
 						'personal_id'			=> $personal_id,
-						'how_hear'				=> ($this->input->post('how_hear') == 4 ? $this->input->post('how_hear_other') : $this->input->post('how_hear')),
+						'how_hear'				=> $how_hear,
 						'receive_free_text'		=> $this->input->post('free_text'),
 						'terms_and_conditions'	=> $this->input->post('terms_and_conditions')
 					);

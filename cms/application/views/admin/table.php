@@ -33,14 +33,15 @@
 			<?php else : ?>
 				
 					<tr>
-						<td colspan="5">There is no record yet</td>
+						<td colspan="6">There is no record yet</td>
 					</tr>
 
 			<?php endif; ?>
 			</table>
 
 		<?php else : ?>
-
+			<?php $parent_page = ($group->role == 2 ? 'members' : 'suppliers'); ?>
+			<?php echo anchor('admin/'.$parent_page, 'Go Back to List'); ?>
 			<div id="steps_container">
 					<h3>Personal Details</h3>
 					<div class="personal_details">
@@ -92,14 +93,18 @@
 							<?php $address_title = ($address_count == 0 ? 'billing' : 'postal'); ?>
 							<h4><?php echo ucfirst($address_title); ?> Address</h4>
 							<div class="<?php echo $address_title; ?>">
-								<p class="text_container">
-									<span class="label"><?php echo ucfirst($address_title); ?> Address 1</span>
-									<span class="info"><?php echo $addr->address_1; ?></span>
-								</p>
-								<p class="text_container">
-									<span class="label"><?php echo ucfirst($address_title); ?> Address 2</span>
-									<span class="info"><?php echo $addr->address_2; ?></span>
-								</p>
+								<?php if($addr->address_1) : ?>
+									<p class="text_container">
+										<span class="label"><?php echo ucfirst($address_title); ?> Address 1</span>
+										<span class="info"><?php echo $addr->address_1; ?></span>
+									</p>
+								<?php endif; ?>
+								<?php if($addr->address_2) : ?> 
+									<p class="text_container">
+										<span class="label"><?php echo ucfirst($address_title); ?> Address 2</span>
+										<span class="info"><?php echo $addr->address_2; ?></span>
+									</p>
+								<?php endif; ?>
 								<p class="label_container">
 									<span class="label">Suburb</span>
 									<span class="info"><?php echo $addr->suburb; ?></span>
