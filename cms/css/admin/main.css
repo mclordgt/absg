@@ -353,7 +353,11 @@ textarea {
 
     #savings-deals h3{
         text-align: center;
-        color: 
+        color: #2f4400;
+    }
+
+    #savings-deals p{
+        text-align: justify;
     }
 
 

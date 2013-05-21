@@ -56,7 +56,7 @@
 		</p>
 
 		<p class="signup">
-			Sign up as a <a href="register/member">Member</a> or <a href="register/supplier">Supplier</a>
+			Sign up as a <?php echo anchor('register/member', 'Member'); ?><!--  or <a href="register/supplier">Supplier</a> -->
 		</p>
 
 	</div> <!-- /#login-container -->
