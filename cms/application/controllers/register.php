@@ -21,7 +21,6 @@ class Register extends CI_Controller {
 		$this->form_validation->set_rules('landline','Landline','trim|required|numeric');
 		$this->form_validation->set_rules('mobile','Mobile','trim|numeric');
 		$this->form_validation->set_rules('fax','Fax','trim|numeric');
-		$this->form_validation->set_rules('activity[]','Activity', 'required');
 
 		$this->form_validation->set_rules('billing_suburb','Suburb','trim|required');
 		$this->form_validation->set_rules('billing_state','State','trim|required');

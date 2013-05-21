@@ -883,13 +883,6 @@
 						primary_activity.parent().find('label').html('Primary Activity').removeClass('error');
 					}
 
-					if(tempActivity.length == 0){
-						$('.check_exception').html('Please select other activity').addClass('error');
-						perr.push(1);
-					} else {
-						$('.check_exception').html('Other Activities').removeClass('error');
-					}
-
 					// Stocks
 					$('.stock_number input').each(function(){
 
