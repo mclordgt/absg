@@ -254,7 +254,6 @@ textarea {
         background: #ddd;
         padding: 5px;
         display: block;
-        width: 120px;
         font-size: 13px;
         font-weight: bold;
         color: #2f4400;
@@ -267,7 +266,25 @@ textarea {
 
     }
 
-    .add-entry:hover{
+    .go-back{
+
+        background: #ddd;
+        padding: 5px;
+        display: block;
+        font-size: 13px;
+        font-weight: bold;
+        color: #2f4400;
+        text-decoration: none;
+        border-radius: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        float: left;
+
+    }
+
+    .add-entry:hover,
+    .go-back:hover{
 
         background: url(../images/ui-bg_glass_65_a4da2f_1x400.png) repeat-x scroll 50% 50% #A4DA2F;
         border: 1px solid #A4DA2F;

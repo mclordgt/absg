@@ -6,6 +6,13 @@
 			<li><?php echo anchor('admin/members', 'Members'); ?></li>
 			<li><?php echo anchor('admin/suppliers', 'Suppliers'); ?></li>
 			<li>
+				<a>Products</a>
+				<ul class="sub_menu">
+					<li><?php echo anchor('products/categories','Categories'); ?></li>
+					<li><?php echo anchor('products/products','Products'); ?></li>
+				</ul>
+			</li>
+			<li>
 				<a>Pages</a>
 				<ul class="sub_menu">
 					<!-- <li><?php echo anchor('admin/page/homepage','Homepage'); ?></li> -->
