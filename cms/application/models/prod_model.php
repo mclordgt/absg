@@ -99,7 +99,7 @@ class Prod_model extends CI_Model{
 	public function countItems($id){
 
 		$this->db->select('COUNT(*) as itemCount');
-		$this->db->where('prod_cat_id');
+		$this->db->where('prod_cat_id',$id);
 		$query = $this->db->get('main_prods');
 
 		return $query->row('itemCount');
