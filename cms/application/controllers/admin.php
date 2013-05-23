@@ -33,6 +33,8 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
+		$data['headerContent']	= (isset($header) ? $header : null);
+		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile'] = 'admin/home';
 
 		$this->load->view('mainview',$data);
@@ -43,7 +45,8 @@ class Admin extends CI_Controller {
 		$page['members']		= $this->admin_model->getGroups(2);
 		$page['all']			= TRUE;
 
-		$data['pageContent']	= ( isset($page) ? $page : null );
+		$data['headerContent']	= (isset($header) ? $header : null);
+		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile']		= 'admin/table';
 
 		$this->load->view('mainview',$data);
@@ -55,7 +58,8 @@ class Admin extends CI_Controller {
 		$page['suppliers']		= $this->admin_model->getGroups(1);
 		$page['all']			= TRUE;
 
-		$data['pageContent']	= ( isset($page) ? $page : null );
+		$data['headerContent']	= (isset($header) ? $header : null);
+		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile']		= 'admin/table';
 
 		$this->load->view('mainview',$data);
@@ -92,6 +96,10 @@ class Admin extends CI_Controller {
 			$this->admin_model->updatePersonalData($personal_id,$personal_data);	
 
 		}
+
+		$header['script'][]		= '<script src="'.base_url().'plugins/ckeditor/ckeditor.js"></script>';
+		$header['script'][]		= '<script src="'.base_url().'plugins/ckfinder/ckfinder.js"></script>';
+		$header['script'][]		= '<script src="'.base_url().'js/accordion-script.js"></script>';
 		
 		$page['group']			= $this->admin_model->getGroup($personal_id);
 		$page['address']		= $this->admin_model->getAddress($personal_id);
@@ -106,7 +114,8 @@ class Admin extends CI_Controller {
 		$page['priorities']		= $this->admin_model->getPriorities($personal_id);
 		$page['all']			= FALSE;
 
-		$data['pageContent']	= ( isset($page) ? $page : null );
+		$data['headerContent']	= (isset($header) ? $header : null);
+		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile']		= 'admin/table';
 
 		$this->load->view('mainview',$data);
@@ -154,10 +163,14 @@ class Admin extends CI_Controller {
 		// get parent_page
 		$pageUrl				= $this->uri->segment(3);
 
+		$header['script'][]		= '<script src="'.base_url().'plugins/ckeditor/ckeditor.js"></script>';
+		$header['script'][]		= '<script src="'.base_url().'plugins/ckfinder/ckfinder.js"></script>';
+
 		$page['all']			= TRUE;
 		$page['contents']		= $this->admin_model->getContents($pageUrl);
 		
-		$data['pageContent']	= ( isset($page) ? $page : null );
+		$data['headerContent']	= (isset($header) ? $header : null);
+		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile']		= 'admin/pages';
 
 		$this->load->view('mainview',$data);
@@ -182,10 +195,14 @@ class Admin extends CI_Controller {
 
 		} 
 
+		$header['script'][]		= '<script src="'.base_url().'plugins/ckeditor/ckeditor.js"></script>';
+		$header['script'][]		= '<script src="'.base_url().'plugins/ckfinder/ckfinder.js"></script>';
+
 		$page['all']			= FALSE;
 		$page['content']		= $this->admin_model->getContent($sub_url);
 		
-		$data['pageContent']	= ( isset($page) ? $page : null );
+		$data['headerContent']	= (isset($header) ? $header : null);
+		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile']		= 'admin/pages';
 
 		$this->load->view('mainview',$data);
@@ -217,10 +234,14 @@ class Admin extends CI_Controller {
 
 		}
 
+		$header['script'][]		= '<script src="'.base_url().'plugins/ckeditor/ckeditor.js"></script>';
+		$header['script'][]		= '<script src="'.base_url().'plugins/ckfinder/ckfinder.js"></script>';
+
 		$page['pages']			= $this->admin_model->getPages();
 		$page['categories']		= $this->admin_model->getCategories();
 
-		$data['pageContent']	= ( isset($page) ? $page : null );
+		$data['headerContent']	= (isset($header) ? $header : null);
+		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile']		= 'admin/add';
 
 		$this->load->view('mainview',$data);
@@ -259,10 +280,14 @@ class Admin extends CI_Controller {
 
 		}
 
+		$header['script'][]		= '<script src="'.base_url().'plugins/ckeditor/ckeditor.js"></script>';
+		$header['script'][]		= '<script src="'.base_url().'plugins/ckfinder/ckfinder.js"></script>';
+
 		$page['media_parents']	= $this->admin_model->getMediaParent();
 		$page['medias']			= $this->admin_model->getMedias();
 
-		$data['pageContent']	= ( isset($page) ? $page : null );
+		$data['headerContent']	= (isset($header) ? $header : null);
+		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile']		= 'admin/media';
 
 		$this->load->view('mainview',$data);

@@ -2,6 +2,10 @@
 
 class Products extends CI_Controller {
 
+	private $page;
+	private $total;
+	private $count;
+
 	public function __construct(){
 
 		parent::__construct();
@@ -33,13 +37,69 @@ class Products extends CI_Controller {
 
 	public function index()
 	{
-		$page['products']		= $this->prod_model->getProducts();
+		// $page['products']		= $this->prod_model->getProducts('A.prod_id','desc',0,10);
 		$page['form']			= FALSE;
 
+		$header['css'][]		= '<link rel="stylesheet" href="'.base_url() .'plugins/jqGrid/css/ui.jqgrid.css">';
+		$header['script'][]		= '<script src="'.base_url().'plugins/jqGrid/js/i18n/grid.locale-en.js"></script>';
+		$header['script'][]		= '<script src="'.base_url().'plugins/jqGrid/js/jquery.jqGrid.min.js"></script>';
+		$header['script'][]		= '<script src="'.base_url().'plugins/jqGrid/js/jquery.jqGrid.src.js"></script>';
+		$header['script'][]		= '<script src="'.base_url().'js/jqGrid-script.js"></script>';
+
+		$data['headerContent']	= (isset($header) ? $header : null);
 		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile']		= 'products/products';
 
 		$this->load->view('mainview',$data);
+	}
+
+	public function getProducts(){
+
+		$page 	= $this->input->get('page');
+		echo $page; die();
+		$limit	= $this->input->get('rows');
+		$sidx 	= ( isset($_GET['sidx'] ) ? 1 : 0);
+		$sord 	= $this->input->get('sord');
+
+		$count = $this->prod_model->countProducts();
+
+		if($count > 0){
+
+			$total_pages = ceil($count/$limit);
+
+		} else {
+
+			$total_pages = 0;
+
+		}
+
+		$products = new products;
+
+		$page = ($page > $total_pages ? $total_pages : 1);
+
+		$start = $limit*$page - $limit;
+
+		$products->page 	= $page;
+		$products->total 	= $total_pages;
+		$products->records 	= $count;
+
+		$i = 0;
+
+		foreach($this->prod_model->getProducts($start,$limit) as $prods){
+			$products->rows[$i]['id'] = $prods->prod_id;
+			$products->rows[$i]['cell'] = array(
+					'prod_name'	=> $prods->prod_name,
+					'prod_cat'	=> $prods->prod_cat,
+					'sub_cat'	=> $prods->sub_cat,
+					'absg_code'	=> $prods->absg_code,
+					'grade'		=> $prods->grade,
+					'ind_code'	=> $prods->ind_code,
+					'unit'		=> $prods->unit
+				);
+			$i++;
+		}
+
+		echo json_encode($products);
 	}
 
 	public function categories(){
@@ -47,6 +107,7 @@ class Products extends CI_Controller {
 		$page['categories']		= $this->prod_model->getCategories();
 		$page['subocat']		= 'cat';
 
+		$data['headerContent']	= (isset($header) ? $header : null);
 		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile']		= 'products/table';
 
@@ -96,6 +157,7 @@ class Products extends CI_Controller {
 		$page['subCategories']	= $this->prod_model->getSubCategories($prod_cat_id);
 		$page['subocat']		= 'sub';
 
+		$data['headerContent']	= (isset($header) ? $header : null);
 		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile']		= 'products/table';
 
@@ -108,6 +170,7 @@ class Products extends CI_Controller {
 		$prod_id 				= $this->uri->segment(4);
 		$page['product']		= $this->prod_model->getProduct($prod_id);
 
+		$data['headerContent']	= (isset($header) ? $header : null);
 		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile']		= 'products/table';
 
@@ -142,6 +205,8 @@ class Products extends CI_Controller {
 
 		}
 
+		$data['headerContent']	= (isset($header) ? $header : null);
+		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile']		= 'products/add';
 
 		$this->load->view('mainview',$data);
@@ -174,6 +239,8 @@ class Products extends CI_Controller {
 
 		}
 
+		$data['headerContent']	= (isset($header) ? $header : null);
+		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile']		= 'products/add';
 
 		$this->load->view('mainview',$data);
@@ -222,6 +289,7 @@ class Products extends CI_Controller {
 		$page['units']			= $this->prod_model->getUnits();
 		$page['form']			= TRUE;
 
+		$data['headerContent']	= (isset($header) ? $header : null);
 		$data['pageContent']	= (isset($page) ? $page : null);
 		$data['pageFile']		= 'products/products';
 

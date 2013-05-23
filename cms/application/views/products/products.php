@@ -111,8 +111,8 @@
 
 	<h1>Product List</h1>
 
-	<table>
-		<tr>
+	<table id="prodList" width="100%">
+<!-- 		<tr>
 			<th>Product</th>
 			<th>Category</th>
 			<th>Sub Category</th>
@@ -120,16 +120,17 @@
 			<th>Units</th>
 			<th>Action</th>
 		</tr>
-		<?php foreach($products as $product) : ?>
+		<?php #foreach($products as $product) : ?>
 		<tr>
-			<td><?php echo $product->prod_name; ?></td>
-			<td><?php echo $product->prod_cat; ?> </td>
-			<td><?php echo ucwords($product->sub_cat); ?> </td>
-			<td><?php echo $product->absg_code; ?> </td>
-			<td><?php echo $product->unit; ?> </td>
-			<td><?php echo anchor('products/view/product/'.$product->prod_id,'View'); ?></td>
+			<td><?php #echo $product->prod_name; ?></td>
+			<td><?php #echo $product->prod_cat; ?> </td>
+			<td><?php #echo ucwords($product->sub_cat); ?> </td>
+			<td><?php #echo $product->absg_code; ?> </td>
+			<td><?php #echo $product->unit; ?> </td>
+			<td><?php #echo anchor('products/view/product/'.$product->prod_id,'View'); ?></td>
 		</tr>
-		<?php endforeach; ?>
+		<?php $endforeach; ?> -->
 	</table>
+	<div id="pager"></div>
 
 <?php endif; ?>

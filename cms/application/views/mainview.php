@@ -1,4 +1,4 @@
-<?php $this->load->view('default/admin/header'); ?>
+<?php $this->load->view('default/admin/header', $headerContent); ?>
 
 <div id="mainview">
 	

@@ -12,30 +12,26 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
+        <!-- Common CSS and Scripts -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/normalize.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/admin/main.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/admin/slide.css">
         <link href="<?php echo base_url(); ?>plugins/jquery-ui-1.10.3.custom.agribsg/css/agribsg/jquery-ui-1.10.3.custom.css" rel="stylesheet">
         <script src="<?php echo base_url(); ?>plugins/jquery-ui-1.10.3.custom.agribsg/js/jquery-1.9.1.js"></script>
         <script src="<?php echo base_url(); ?>plugins/jquery-ui-1.10.3.custom.agribsg/js/jquery-ui-1.10.3.custom.js"></script>
-    <?php if(in_array($this->uri->segment(2),array('page','add','edit','media'))): ?>
 
-        <script src="<?php echo base_url(); ?>plugins/ckeditor/ckeditor.js"></script>
-        <script src="<?php echo base_url(); ?>plugins/ckfinder/ckfinder.js"></script>
+        <!-- Page specific css -->
+        <?php echo (isset($css) ? implode("\n",$css) : null); ?>
 
-    <?php endif; ?>
+        <!-- Page specific scripts -->
+        <?php echo (isset($script) ? implode("\n", $script) : null); ?>
+
         <script>
         $(function() {
             
             $('#menu').css({'width':'200px'}).menu();
 
-            <?php if( $this->uri->segment(2) == 'view') : ?>
-                $( "#steps_container" ).accordion({ 
-                    collapsible: true,
-                    heightStyle: 'content',
-                    clearStyle: true
-                });
-            <?php endif; ?>
+            <?php echo (isset($inlineScript) ? implode("\n",$inlineScript) : null); ?>
         });
         </script>
     </head>
