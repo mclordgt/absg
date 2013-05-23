@@ -56,9 +56,8 @@ class Products extends CI_Controller {
 	public function getProducts(){
 
 		$page 	= $this->input->get('page');
-		echo $page; die();
 		$limit	= $this->input->get('rows');
-		$sidx 	= ( isset($_GET['sidx'] ) ? 1 : 0);
+		$sidx 	= ( $_GET['sidx'] == 'id' ? 'A.prod_id' : $_GET['sidx']);
 		$sord 	= $this->input->get('sord');
 
 		$count = $this->prod_model->countProducts();
@@ -73,21 +72,21 @@ class Products extends CI_Controller {
 
 		}
 
-		$products = new products;
+		$products = array();
 
 		$page = ($page > $total_pages ? $total_pages : 1);
 
 		$start = $limit*$page - $limit;
 
-		$products->page 	= $page;
-		$products->total 	= $total_pages;
-		$products->records 	= $count;
+		$products['page'] 		= $page;
+		$products['total'] 		= $total_pages;
+		$products['records'] 	= $count;
 
 		$i = 0;
-
-		foreach($this->prod_model->getProducts($start,$limit) as $prods){
-			$products->rows[$i]['id'] = $prods->prod_id;
-			$products->rows[$i]['cell'] = array(
+		foreach($this->prod_model->getProducts($sidx,$sord,$start,$limit) as $prods){
+			$products['rows'][$i]['id'] = $prods->prod_id;
+			$products['rows'][$i]['cell'] = array(
+					'prod_id'	=> $prods->prod_id,
 					'prod_name'	=> $prods->prod_name,
 					'prod_cat'	=> $prods->prod_cat,
 					'sub_cat'	=> $prods->sub_cat,

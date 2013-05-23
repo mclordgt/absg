@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/admin/main.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/admin/slide.css">
         <link href="<?php echo base_url(); ?>plugins/jquery-ui-1.10.3.custom.agribsg/css/agribsg/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+        <link href="<?php echo base_url(); ?>plugins/jquery-ui-1.10.3.custom.agribsg/css/agribsg/jquery-ui-1.10.3.custom.css" rel="stylesheet">
         <script src="<?php echo base_url(); ?>plugins/jquery-ui-1.10.3.custom.agribsg/js/jquery-1.9.1.js"></script>
         <script src="<?php echo base_url(); ?>plugins/jquery-ui-1.10.3.custom.agribsg/js/jquery-ui-1.10.3.custom.js"></script>
 

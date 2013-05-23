@@ -157,7 +157,7 @@ class Prod_model extends CI_Model{
 
 	}
 
-	public function getProducts($start,$limit){
+	public function getProducts($sidx,$sord,$start,$limit){
 
 		$this->db->from('products as A');
 		$this->db->join('main_prods as B', 'B.prod_id = A.prod_id');
@@ -176,8 +176,16 @@ class Prod_model extends CI_Model{
 	public function countProducts(){
 
 		$this->db->select('COUNT(*) as count');
-		$this->db->where('active',0);
-		$query = $this->db->get('main_prods');
+		$this->db->from('products as A');
+		$this->db->join('main_prods as B', 'B.prod_id = A.prod_id');
+		$this->db->join('prod_categories as C', 'C.prod_cat_id = B.prod_cat_id');
+		$this->db->join('sub_categories as D', 'D.sub_cat_id = B.sub_cat_id');
+		$this->db->join('units as E', 'E.unit_id = A.unit_id');
+		$this->db->where('B.active', 0);
+		// $this->db->select('COUNT(*) as count');
+		// $this->db->where('active',0);
+		// $query = $this->db->get('main_prods');
+		$query = $this->db->get();
 
 		return $query->row('count');
 

@@ -2,18 +2,24 @@ jQuery(document).ready(function(){
 	jQuery("#prodList").jqGrid({ 
 		url:'http://localhost/agriBSG/cms/products/getProducts', 
 		datatype: "json", 
-		colNames:['Product','Category', 'Sub Category', 'ABSG Code'], 
+		colNames:['ID','Product','Category', 'Sub Category', 'ABSG Code', 'Grade'], 
 		colModel:[
-			{product:'product',index:'product', width:55}, 
-			{category:'category',index:'category', width:90}, 
-			{sub:'sub',index:'sub', width:100}, 
-			{code:'code',index:'code', width:80, align:"right"}, 
+			{name:'prod_id',index:'prod_id'}, 
+			{name:'prod_name',index:'prod_name'}, 
+			{name:'prod_cat',index:'prod_cat'}, 
+			{name:'sub_cat',index:'sub_cat'}, 
+			{name:'absg_code',index:'absg_code'}, 
+			{name:'grade',index:'grade'}
 		], rowNum:10, rowList:[10,20,30], 
-		pager: '#pager2', 
+		pager: '#pager', 
 		sortname: 'id', 
+		width: 805,
 		viewrecords: true, 
 		sortorder: "desc", 
-		caption:"Product List" 
+		caption:"Product List",
+		loadError: function(xhr,status,error){
+			console.log(error);
+		}
 	}); 
-	jQuery("#prodList").jqGrid('navGrid','#pager2',{ edit:false, add:false, del:false});
+	jQuery("#prodList").jqGrid('navGrid','#pager',{ edit:false, add:false, del:false});
 });

@@ -157,7 +157,7 @@ textarea {
         padding: 0;
     }
 
-    #right table{
+/*    #right table{
         
         width: 100%;
         border-top: 1px solid #ccc; 
@@ -165,9 +165,9 @@ textarea {
         border-right: 1px solid #ccc; 
         font-family: Arial;
 
-    }
+    }*/
 
-    #right table tr th{
+/*    #right table tr th{
 
         background: url(../images/ui-bg_glass_65_a4da2f_1x400.png) repeat-x scroll 50% 50% #A4DA2F;
         color: #2f4400;
@@ -176,10 +176,8 @@ textarea {
         font-weight: normal;
         font-size: 12px;
         text-align: left;
-
-
-    }
-    #right table td{
+    }*/
+/*    #right table td{
         
         border-bottom: 1px solid #ccc;
         padding: 5px;
@@ -203,9 +201,9 @@ textarea {
         
         color: #A4DA2F;
 
-    }
+    }*/
 
-    #right input[type="text"]{
+/*    #right input[type="text"]{
         border: 1px solid #b6b6b6;
         width: 98%;
         padding: 5px;
@@ -229,7 +227,7 @@ textarea {
     #right option{
 
         margin-bottom: 3px;
-    }
+    }*/
 
     .button {
         
