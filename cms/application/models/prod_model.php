@@ -157,7 +157,7 @@ class Prod_model extends CI_Model{
 
 	}
 
-	public function getProducts($sidx,$sord,$start,$limit){
+	public function getProducts($sidx,$sord,$start,$limit,$searchField=null,$searchString=null,$searchOper=null){
 
 		$this->db->from('products as A');
 		$this->db->join('main_prods as B', 'B.prod_id = A.prod_id');
@@ -165,7 +165,7 @@ class Prod_model extends CI_Model{
 		$this->db->join('sub_categories as D', 'D.sub_cat_id = B.sub_cat_id');
 		$this->db->join('units as E', 'E.unit_id = A.unit_id');
 		$this->db->where('B.active', 0);
-		// $this->db->order_by($sidx,$sord);
+		$this->db->order_by($sidx,$sord);
 		$this->db->limit($limit, $start);
 		$query = $this->db->get();
 
@@ -182,13 +182,31 @@ class Prod_model extends CI_Model{
 		$this->db->join('sub_categories as D', 'D.sub_cat_id = B.sub_cat_id');
 		$this->db->join('units as E', 'E.unit_id = A.unit_id');
 		$this->db->where('B.active', 0);
-		// $this->db->select('COUNT(*) as count');
-		// $this->db->where('active',0);
-		// $query = $this->db->get('main_prods');
 		$query = $this->db->get();
 
 		return $query->row('count');
 
+	}
+
+	public function delProducts($id,$data){
+
+		$this->db->where('prod_id',$id);
+		$query = $this->db->update('main_prods',$data);
+
+		echo json_encode($query);
+
+	}
+
+	public function getProduct($id){
+		$this->db->from('products as A');
+		$this->db->join('main_prods as B', 'B.prod_id = A.prod_id');
+		$this->db->join('prod_categories as C', 'C.prod_cat_id = B.prod_cat_id');
+		$this->db->join('sub_categories as D', 'D.sub_cat_id = B.sub_cat_id');
+		$this->db->join('units as E', 'E.unit_id = A.unit_id');
+		$this->db->where('A.prod_id', $id);
+		$query = $this->db->get();
+
+		return $query->result();
 	}
 
 }

@@ -45,6 +45,7 @@ class Products extends CI_Controller {
 		$header['script'][]		= '<script src="'.base_url().'plugins/jqGrid/js/jquery.jqGrid.min.js"></script>';
 		$header['script'][]		= '<script src="'.base_url().'plugins/jqGrid/js/jquery.jqGrid.src.js"></script>';
 		$header['script'][]		= '<script src="'.base_url().'js/jqGrid-script.js"></script>';
+		$header['script'][]		= '<script src="'.base_url().'plugins/jqGrid/js/i18n/grid.locale-en.js"></script>';
 
 		$data['headerContent']	= (isset($header) ? $header : null);
 		$data['pageContent']	= (isset($page) ? $page : null);
@@ -55,10 +56,16 @@ class Products extends CI_Controller {
 
 	public function getProducts(){
 
-		$page 	= $this->input->get('page');
-		$limit	= $this->input->get('rows');
-		$sidx 	= ( $_GET['sidx'] == 'id' ? 'A.prod_id' : $_GET['sidx']);
-		$sord 	= $this->input->get('sord');
+		$page 			= (int)$this->input->get('page');
+		$limit			= (int)$this->input->get('rows');
+		$sidx 			= ($this->input->get('sidx')=='id' ? 'A.prod_id' : $this->input->get('sidx') );
+		$sord 			= $this->input->get('sord');
+
+		$_search		= $this->input->get('_search');
+
+		$searchField	= (isset($_GET['searchField']) ? ($_GET['searchField']=='prod_id' ? 'A.prod_id' : $_GET['searchField']) : null) ;
+		$searchString	= (isset($_GET['searchString']) ? $_GET['searchString']: null);
+		$searchOper		= (isset($_GET['searchOper']) ? $_GET['searchOper'] : null);
 
 		$count = $this->prod_model->countProducts();
 
@@ -74,19 +81,44 @@ class Products extends CI_Controller {
 
 		$products = array();
 
-		$page = ($page > $total_pages ? $total_pages : 1);
+		$page = ($page > $total_pages ? $total_pages : $page);
 
-		$start = $limit*$page - $limit;
+		$start = ($limit * $page) - $limit;
 
 		$products['page'] 		= $page;
 		$products['total'] 		= $total_pages;
 		$products['records'] 	= $count;
 
+		if($_GET['_search']==false){
+			$returnProducts = $this->prod_model->getProducts($sidx,$sord,$start,$limit);
+		} else {
+
+			switch ($searchOper) {
+				case 'eq':
+					$searchOper = '=';	
+				break;
+				
+				case 'ne':
+					$searchOper = '!=';	
+				break;
+
+				case 'eq':
+					$searchOper = '=';	
+				break;
+
+				case 'eq':
+					$searchOper = '=';	
+				break;
+			}
+
+			$returnProducts = $this->prod_model->getProducts($sidx,$sord,$start,$limit,$searchField,$searchString,$searchOper);
+		}
+
 		$i = 0;
-		foreach($this->prod_model->getProducts($sidx,$sord,$start,$limit) as $prods){
-			$products['rows'][$i]['id'] = $prods->prod_id;
+
+		foreach($returnProducts as $prods){
 			$products['rows'][$i]['cell'] = array(
-					'prod_id'	=> $prods->prod_id,
+					'id'		=> $prods->prod_id,
 					'prod_name'	=> $prods->prod_name,
 					'prod_cat'	=> $prods->prod_cat,
 					'sub_cat'	=> $prods->sub_cat,
@@ -99,6 +131,26 @@ class Products extends CI_Controller {
 		}
 
 		echo json_encode($products);
+	}
+
+	public function ajxProducts(){
+
+		switch($this->input->post('oper')){
+			case 'del':
+				$del_data = array(
+						'active'	=> 1
+					);
+
+				$this->prod_model->delProducts($this->input->post('id'),$del_data);
+
+			break;
+
+			case 'view':
+
+				echo json_encode( $this->prod_model->getProduct($this->input->post('id')) );
+				
+			break;
+		}
 	}
 
 	public function categories(){
